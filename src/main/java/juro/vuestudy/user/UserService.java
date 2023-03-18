@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.function.Predicate;
 
 @Service
 public class UserService {
@@ -45,17 +44,13 @@ public class UserService {
 
     public List<User> userList(UserSearchCriteria criteria) {
         return userMap.values().stream()
-                .skip((long) criteria.getPage() * criteria.getSize())
                 .filter(user -> criteria.getRole() == null || user.getUserRole() == criteria.getRole())
                 .filter(user -> criteria.getQuery() == null || criteria.getSearchType().getKeyExtractor().apply(user).contains(criteria.getQuery()))
                 .filter(user -> criteria.getStartAt() == null || user.getCreatedAt().isAfter(criteria.getStartAt()))
                 .filter(user -> criteria.getEndAt() == null || user.getCreatedAt().isBefore(criteria.getEndAt()))
+                .skip((long) criteria.getPage() * criteria.getSize())
                 .limit(criteria.getSize())
                 .toList();
-    }
-
-    private Predicate<UserSearchCriteria> isBlank() {
-        return criteria -> (criteria == null) || criteria.getQuery().isBlank();
     }
 
     public User getUser(Long id) {
