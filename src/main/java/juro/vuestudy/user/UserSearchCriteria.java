@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 public class UserSearchCriteria {
-    private int page;
-    private int size;
+    private Long page;
+    private Long size;
     private SearchType searchType;
     private String query;
     private UserRole role;
