@@ -1,15 +1,40 @@
 package juro.vuestudy.user;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@RequiredArgsConstructor
 @RequestMapping("/api")
 @RestController
 public class UserController {
 
+    private final UserService userService;
+
     @GetMapping("/users")
-    public String hello() {
-        return "hello, user";
+    public List<User> readList(UserSearchCriteria userSearchCriteria) {
+
+        return userService.userList(userSearchCriteria);
+    }
+
+    @PostMapping("/users/{id}")
+    public User readUser(@PathVariable Long id) {
+        return userService.getUser(id);
+    }
+
+    @PostMapping("/users")
+    public void create(User user) {
+        userService.createUser(user);
+    }
+
+    @PutMapping("/users/{id}")
+    public void edit(User user) {
+        userService.updateUser(user);
+    }
+
+    @DeleteMapping("/users/{id}")
+    public void delete(@PathVariable Long id) {
+        userService.deleteUser(id);
     }
 }
