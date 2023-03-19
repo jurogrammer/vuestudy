@@ -1,12 +1,10 @@
 import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router';
 import MyHome from '@/views/MainHome.vue';
-import MyAbout from '@/views/MainAbout.vue';
-import MyContact from '@/views/MainContact.vue';
+import UserList from '@/views/user/UserList.vue'
 
 const routes: Array<RouteRecordRaw> = [
     {path: '/', component: MyHome},
-    {path: '/about', component: MyAbout},
-    {path: '/contact', component: MyContact},
+    {path: '/users', component: UserList},
 ];
 
 const router = createRouter({

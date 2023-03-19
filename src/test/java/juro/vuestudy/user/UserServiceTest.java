@@ -5,6 +5,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -30,8 +31,8 @@ class UserServiceTest {
                 .page(0L)
                 .size(20L)
                 .role(UserRole.ADMIN)
-                .startAt(LocalDateTime.now().minusDays(10L))
-                .endAt(LocalDateTime.now())
+                .startAt(LocalDate.now().minusDays(10L))
+                .endAt(LocalDate.now())
                 .build();
         List<User> users = userService.userList(criteria);
 

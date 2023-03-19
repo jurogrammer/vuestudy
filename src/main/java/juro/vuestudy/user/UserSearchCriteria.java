@@ -3,6 +3,7 @@ package juro.vuestudy.user;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -13,6 +14,6 @@ public class UserSearchCriteria {
     private SearchType searchType;
     private String query;
     private UserRole role;
-    private LocalDateTime startAt;
-    private LocalDateTime endAt;
+    private LocalDate startAt;
+    private LocalDate endAt;
 }

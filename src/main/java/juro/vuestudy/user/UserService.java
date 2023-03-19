@@ -46,8 +46,8 @@ public class UserService {
         return userMap.values().stream()
                 .filter(user -> criteria.getRole() == null || user.getUserRole() == criteria.getRole())
                 .filter(user -> criteria.getQuery() == null || criteria.getSearchType().getKeyExtractor().apply(user).contains(criteria.getQuery()))
-                .filter(user -> criteria.getStartAt() == null || user.getCreatedAt().isAfter(criteria.getStartAt()))
-                .filter(user -> criteria.getEndAt() == null || user.getCreatedAt().isBefore(criteria.getEndAt()))
+                .filter(user -> criteria.getStartAt() == null || user.getCreatedAt().toLocalDate().isAfter(criteria.getStartAt()))
+                .filter(user -> criteria.getEndAt() == null || user.getCreatedAt().toLocalDate().isBefore(criteria.getEndAt()))
                 .skip((long) criteria.getPage() * criteria.getSize())
                 .limit(criteria.getSize())
                 .toList();
